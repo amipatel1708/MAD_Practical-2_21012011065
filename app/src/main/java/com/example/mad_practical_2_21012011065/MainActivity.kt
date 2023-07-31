@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.os.Message
 import android.util.Log
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     val TAG="MainActivity"
@@ -38,8 +40,17 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         showMessage("onDestroy method is called.")
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        showMessage("onRestart method is called.")
+    }
     fun showMessage(message: String){
         Log.i(TAG, message)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        val constraint:ConstraintLayout?=findViewById(R.id.mainConstraint)
+        if (constraint!=null){
+            Snackbar.make(constraint,message,Snackbar.LENGTH_SHORT).show()
+        }
     }
 }
